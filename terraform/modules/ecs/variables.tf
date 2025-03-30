@@ -26,6 +26,10 @@ variable "subnet_a_id" {
   type = string
 }
 
+variable "subnet_c_id" {
+  type = string
+}
+
 variable "aws_lb_target_group_alb_arn" {
   type = string
 }

@@ -39,6 +39,7 @@ module "ecs" {
   ecr_repo_url                    = "${module.ci.ecr_repository_url}:latest"
   vpc_id                          = module.vpc.vpc_id
   subnet_a_id                     = module.vpc.subnet_a_id
+  subnet_c_id                     = module.vpc.subnet_c_id
   aws_lb_target_group_alb_arn     = module.alb.aws_lb_target_group_alb_arn
   aws_security_group_alb_id       = module.alb.aws_security_group_alb_id
   ssm_parameter_access_policy_arn = module.ssm.ssm_parameter_policy_arn

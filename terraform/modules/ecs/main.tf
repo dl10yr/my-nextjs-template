@@ -57,7 +57,7 @@ resource "aws_ecs_service" "nextjs" {
   }
 
   network_configuration {
-    subnets          = [var.subnet_a_id]
+    subnets          = [var.subnet_a_id, var.subnet_c_id]
     security_groups  = [aws_security_group.nextjs.id]
     assign_public_ip = true
   }
