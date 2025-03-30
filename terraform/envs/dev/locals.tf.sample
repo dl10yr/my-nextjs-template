@@ -1,0 +1,10 @@
+locals {
+  project_name = "my-nextjs-template"
+  env          = "dev"
+  region       = "ap-northeast-1"
+  domain      = "example.com"
+  full_repository_id      = "dl10yr/my-nextjs-template"
+  env_hoge = "hoge"
+  docker_user = "xxxxx"
+  docker_token = "dckr_pat_xxxx"
+}

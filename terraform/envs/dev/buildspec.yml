@@ -1,0 +1,27 @@
+version: 0.2
+
+env:
+  parameter-store:
+    ECR_REPOSITORY_NAME: /CodeBuild/nextjs-my-blueprint/dev/ECR_REPOSITORY_NAME
+    DOCKER_USER: /CodeBuild/DOCKER_USER
+    DOCKER_TOKEN: /CodeBuild/DOCKER_TOKEN
+
+phases:
+  install:
+    commands:
+      - aws --version
+
+  pre_build:
+    commands:
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' | sed -e 's@"@@g')
+      - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
+      - echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
+
+  build:
+    commands:
+      - docker build -t ${ECR_REPOSITORY_NAME} .
+      - docker tag ${ECR_REPOSITORY_NAME}:latest ${ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
+
+  post_build:
+    commands:
+      - docker push ${ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
