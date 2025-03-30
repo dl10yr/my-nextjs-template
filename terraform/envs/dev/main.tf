@@ -9,8 +9,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "nextjs-my-blueprint-tfstate"
-    key    = "nextjs-my-blueprint-tfstate/dev.tfstate"
+    bucket = "my-nextjs-template-tfstate"
+    key    = "my-nextjs-template-tfstate/${local.env}.tfstate"
     region = "ap-northeast-1"
   }
 }
@@ -34,7 +34,6 @@ module "ecs" {
   source                          = "../../modules/ecs"
   project_name                    = local.project_name
   env                             = local.env
-  region                          = local.region
   fargate_cpu                     = 256 // MB
   fargate_memory                  = 512 // MB
   ecr_repo_url                    = "${module.ci.ecr_repository_url}:latest"
@@ -46,33 +45,32 @@ module "ecs" {
   aws_ssm_parameter_env_hoge_arn  = module.ssm.ssm_parameter_env_hoge_arn
 }
 
-# module "domain" {
-#   source       = "../../modules/domain"
-#   project_name = local.project_name
-#   env          = local.env
-#   domain      = local.domain
-#   alb_dns_name = module.alb.dns_name
-#   alb_zone_id = module.alb.zone_id
-#   alb_name = module.alb.alb_name
-#   alb_arn = module.alb.alb_arn
-#   alb_target_group_arn = module.alb.aws_lb_target_group_alb_arn
+module "domain" {
+  source               = "../../modules/domain"
+  project_name         = local.project_name
+  env                  = local.env
+  domain               = local.domain
+  alb_dns_name         = module.alb.dns_name
+  alb_zone_id          = module.alb.zone_id
+  alb_arn              = module.alb.alb_arn
+  alb_target_group_arn = module.alb.aws_lb_target_group_alb_arn
 
-#   providers = {
-#     aws           = aws
-#     aws.virginia  = aws.virginia
-#   }
-# }
+  providers = {
+    aws          = aws
+    aws.virginia = aws.virginia
+  }
+}
 
-# module "cloud_front" {
-#   source       = "../../modules/cloud_front"
-#   project_name = local.project_name
-#   env          = local.env
-#   domain = local.domain
-#   alb_name = module.alb.alb_name
-#   route53_record_fqdn = module.domain.route53_record_fqdn
-#   route53_zone_id = module.domain.route53_zone_id
-#   virginia_cert_arn = module.domain.virginia_cert_arn
-# }
+module "cloud_front" {
+  source              = "../../modules/cloud_front"
+  project_name        = local.project_name
+  env                 = local.env
+  domain              = local.domain
+  alb_name            = module.alb.alb_name
+  route53_record_fqdn = module.domain.route53_record_fqdn
+  route53_zone_id     = module.domain.route53_zone_id
+  virginia_cert_arn   = module.domain.virginia_cert_arn
+}
 
 module "ci" {
   source                          = "../../modules/ci"

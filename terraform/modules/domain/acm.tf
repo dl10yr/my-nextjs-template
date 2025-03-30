@@ -3,7 +3,7 @@ resource "aws_acm_certificate" "tokyo_cert" {
   validation_method = "DNS"
 
   tags = {
-    Name    = "${var.project_name}-${var.env}-wildcard-sslcert"
+    Name    = "${var.project_name}-${var.env}-tokyo-wildcard-sslcert"
     Project = var.project_name
     Env     = var.env
   }
@@ -34,7 +34,7 @@ resource "aws_route53_record" "route53_acm_dns_resolve" {
   records         = [each.value.record]
 }
 
-resource "aws_acm_certificate_validation" "cert_valid" {
+resource "aws_acm_certificate_validation" "tokeo_cert_validation" {
   certificate_arn         = aws_acm_certificate.tokyo_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.route53_acm_dns_resolve : record.fqdn]
 }
@@ -46,7 +46,7 @@ resource "aws_acm_certificate" "virginia_cert" {
   validation_method = "DNS"
 
   tags = {
-    Name    = "${var.project_name}-${var.env}-wildcard-sslcert"
+    Name    = "${var.project_name}-${var.env}-virginia-wildcard-sslcert"
     Project = var.project_name
     Env     = var.env
   }
@@ -60,7 +60,7 @@ resource "aws_acm_certificate" "virginia_cert" {
   ]
 }
 
-resource "aws_acm_certificate_validation" "virginia_cert_valid" {
+resource "aws_acm_certificate_validation" "virginia_cert_validation" {
   provider = aws.virginia
 
   certificate_arn         = aws_acm_certificate.virginia_cert.arn

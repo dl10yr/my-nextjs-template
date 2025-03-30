@@ -1,5 +1,5 @@
 locals {
-  container_name = "${var.project_name}-nextjs"
+  container_name = "${var.project_name}-${var.env}-nextjs"
 }
 
 resource "aws_ecs_cluster" "ecs_cluster" {
@@ -7,7 +7,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 resource "aws_ecs_task_definition" "nextjs" {
-  family                   = "${var.project_name}-nextjs"
+  family                   = "${var.project_name}-${var.env}-nextjs"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "nextjs" {
 }
 
 resource "aws_ecs_service" "nextjs" {
-  name            = "${var.project_name}-nextjs"
+  name            = "${var.project_name}-${var.env}-nextjs"
   cluster         = aws_ecs_cluster.ecs_cluster.id
   launch_type     = "FARGATE"
   task_definition = aws_ecs_task_definition.nextjs.arn
@@ -65,7 +65,7 @@ resource "aws_ecs_service" "nextjs" {
 
 resource "aws_security_group" "nextjs" {
   vpc_id = var.vpc_id
-  name   = "${var.project_name}-nextjs-sg"
+  name   = "${var.project_name}-${var.env}-nextjs-sg"
 
   ingress {
     from_port       = 3000

@@ -9,3 +9,7 @@ output "route53_zone_id" {
 output "virginia_cert_arn" {
   value = aws_acm_certificate.virginia_cert.arn
 }
+
+output "name_servers" {
+  value = aws_route53_zone.public.name_servers
+}

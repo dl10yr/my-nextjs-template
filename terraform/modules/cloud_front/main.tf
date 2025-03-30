@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "cf" {
   enabled         = true
   is_ipv6_enabled = true
-  comment         = "cache distibution"
+  comment         = "${var.project_name}-${var.env}-cloudfront-distribution"
   price_class     = "PriceClass_All"
 
   origin {

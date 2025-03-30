@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
   vpc_id = var.vpc_id
-  name   = "${var.project_name}-alb-sg"
+  name   = "${var.project_name}-${var.env}-alb-sg"
 
   ingress {
     from_port   = 80
@@ -32,7 +32,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_lb" "alb" {
-  name               = "${var.project_name}-alb-lb"
+  name               = "${var.project_name}-${var.env}-alb-lb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
@@ -40,7 +40,7 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "alb" {
-  name        = "${var.project_name}-alb-tg"
+  name        = "${var.project_name}-${var.env}-alb-tg"
   port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
