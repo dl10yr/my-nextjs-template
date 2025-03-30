@@ -1,27 +1,27 @@
 variable "project_name" {
-  type        = string
+  type = string
 }
 
 variable "env" {
-  type        = string
+  type = string
 }
 
 variable "region" {
-  type        = string
+  type = string
 }
 
 variable "ecr_repository_name" {
-  type        = string
+  type = string
 }
 
 variable "env_hoge" {
-  type        = string
+  type = string
 }
 
 variable "docker_user" {
-  type        = string
+  type = string
 }
 
 variable "docker_token" {
-  type        = string
+  type = string
 }

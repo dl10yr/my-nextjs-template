@@ -14,13 +14,13 @@ variable "region" {
 }
 
 variable "vpc_id" {
-  type        = string
+  type = string
 }
 
 variable "subnet_a_id" {
-  type        = string
+  type = string
 }
 
 variable "subnet_c_id" {
-  type        = string
+  type = string
 }

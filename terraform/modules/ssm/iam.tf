@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "ssm_parameter_access" {
       "arn:aws:ssm:${var.region}:*:parameter/*"
     ]
   }
-  
+
   # SecureString を復号するための KMS 権限
   statement {
     effect = "Allow"

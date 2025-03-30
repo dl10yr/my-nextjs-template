@@ -13,21 +13,21 @@ variable "domain" {
 }
 
 variable "alb_arn" {
-  type        = string
+  type = string
 }
 
 variable "alb_name" {
-  type        = string
+  type = string
 }
 
 variable "alb_dns_name" {
-  type        = string
+  type = string
 }
 
 variable "alb_zone_id" {
-  type        = string
+  type = string
 }
 
 variable "alb_target_group_arn" {
-  type        = string
+  type = string
 }

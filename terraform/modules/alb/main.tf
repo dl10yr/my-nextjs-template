@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
-  vpc_id      = var.vpc_id
-  name        = "${var.project_name}-alb-sg"
+  vpc_id = var.vpc_id
+  name   = "${var.project_name}-alb-sg"
 
   ingress {
     from_port   = 80
@@ -55,7 +55,7 @@ resource "aws_lb_target_group" "alb" {
     path                = "/"
   }
 
-  depends_on = [aws_lb.alb] 
+  depends_on = [aws_lb.alb]
 }
 
 resource "aws_lb_listener" "alb" {

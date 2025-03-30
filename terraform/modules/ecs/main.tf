@@ -10,33 +10,33 @@ resource "aws_ecs_task_definition" "nextjs" {
   family                   = "${var.project_name}-nextjs"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = "${var.fargate_cpu}"
-  memory                   = "${var.fargate_memory}"
+  cpu                      = var.fargate_cpu
+  memory                   = var.fargate_memory
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = jsonencode([
     {
-      "name": local.container_name,
-      "image": "${var.ecr_repo_url}",
-      "essential": true,
-      "portMappings": [
+      "name" : local.container_name,
+      "image" : "${var.ecr_repo_url}",
+      "essential" : true,
+      "portMappings" : [
         {
-          "containerPort": 3000,
-          "hostPort": 3000,
+          "containerPort" : 3000,
+          "hostPort" : 3000,
         }
       ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-region": "ap-northeast-1",
-          "awslogs-stream-prefix": "nextjs",
-          "awslogs-group": "${aws_cloudwatch_log_group.nextjs.name}"
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-region" : "ap-northeast-1",
+          "awslogs-stream-prefix" : "nextjs",
+          "awslogs-group" : "${aws_cloudwatch_log_group.nextjs.name}"
         }
       },
-      "secrets": [
+      "secrets" : [
         {
-          "name": "HOGE",
-          "valueFrom": "${var.aws_ssm_parameter_env_hoge_arn}"
+          "name" : "HOGE",
+          "valueFrom" : "${var.aws_ssm_parameter_env_hoge_arn}"
         }
       ],
     }
@@ -68,9 +68,9 @@ resource "aws_security_group" "nextjs" {
   name   = "${var.project_name}-nextjs-sg"
 
   ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
+    from_port       = 3000
+    to_port         = 3000
+    protocol        = "tcp"
     security_groups = [var.aws_security_group_alb_id]
   }
 
@@ -103,7 +103,7 @@ resource "aws_appautoscaling_policy" "scale_up" {
     metric_aggregation_type = "Average"
 
     step_adjustment {
-      scaling_adjustment = 1
+      scaling_adjustment          = 1
       metric_interval_lower_bound = 0
     }
   }
@@ -122,7 +122,7 @@ resource "aws_appautoscaling_policy" "scale_down" {
     metric_aggregation_type = "Average"
 
     step_adjustment {
-      scaling_adjustment = -1
+      scaling_adjustment          = -1
       metric_interval_upper_bound = 0
     }
   }

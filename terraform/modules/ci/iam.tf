@@ -1,6 +1,6 @@
 data "aws_iam_policy_document" "codebuild_service_role" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "codebuild_service_role" {
 
 data "aws_iam_policy_document" "codepipeline_service_role" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "codepipeline_service_role" {
 resource "aws_iam_policy" "codebuild_policy" {
   name        = "policy-${var.project_name}-${var.env}-codebuild"
   description = "Policy for CodeBuild"
-  policy      = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -68,9 +68,9 @@ resource "aws_iam_policy" "codebuild_policy" {
         Resource = "*"
       },
       {
-        "Effect": "Allow",
-        "Action": "codestar-connections:UseConnection",
-        "Resource": "*"
+        "Effect" : "Allow",
+        "Action" : "codestar-connections:UseConnection",
+        "Resource" : "*"
       },
     ]
   })
@@ -80,7 +80,7 @@ resource "aws_iam_policy" "codebuild_policy" {
 resource "aws_iam_policy" "codepipeline_policy" {
   name        = "policy-${var.project_name}-${var.env}-codepipeline"
   description = "Policy for CodePipeline"
-  policy      = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -113,11 +113,11 @@ resource "aws_iam_policy" "codepipeline_policy" {
         Resource = "*"
       },
       {
-        "Effect": "Allow",
-        "Action": [
-            "codestar-connections:UseConnection"
+        "Effect" : "Allow",
+        "Action" : [
+          "codestar-connections:UseConnection"
         ],
-        "Resource": "*"
+        "Resource" : "*"
       },
     ]
   })

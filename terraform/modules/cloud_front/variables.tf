@@ -9,21 +9,21 @@ variable "env" {
 }
 
 variable "alb_name" {
-  type        = string
+  type = string
 }
 
 variable "domain" {
-  type        = string
+  type = string
 }
 
 variable "route53_record_fqdn" {
-  type        = string
+  type = string
 }
 
 variable "route53_zone_id" {
-  type        = string
+  type = string
 }
 
 variable "virginia_cert_arn" {
-  type        = string
+  type = string
 }

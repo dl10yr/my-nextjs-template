@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias   = "virginia"
-  region  = "us-east-1"
+  alias  = "virginia"
+  region = "us-east-1"
 }
 
 terraform {
@@ -21,29 +21,29 @@ module "vpc" {
 }
 
 module "alb" {
-  source = "../../modules/alb"
+  source       = "../../modules/alb"
   project_name = local.project_name
-  env = local.env
-  region = local.region
-  vpc_id = module.vpc.vpc_id
-  subnet_a_id = module.vpc.subnet_a_id
-  subnet_c_id = module.vpc.subnet_c_id
+  env          = local.env
+  region       = local.region
+  vpc_id       = module.vpc.vpc_id
+  subnet_a_id  = module.vpc.subnet_a_id
+  subnet_c_id  = module.vpc.subnet_c_id
 }
 
 module "ecs" {
-  source       = "../../modules/ecs"
-  project_name = local.project_name
-  env          = local.env
-  region          = local.region
-  fargate_cpu = 256 // MB
-  fargate_memory = 512 // MB
-  ecr_repo_url = "${module.ci.ecr_repository_url}:latest"
-  vpc_id = module.vpc.vpc_id
-  subnet_a_id = module.vpc.subnet_a_id
-  aws_lb_target_group_alb_arn = module.alb.aws_lb_target_group_alb_arn
-  aws_security_group_alb_id = module.alb.aws_security_group_alb_id
+  source                          = "../../modules/ecs"
+  project_name                    = local.project_name
+  env                             = local.env
+  region                          = local.region
+  fargate_cpu                     = 256 // MB
+  fargate_memory                  = 512 // MB
+  ecr_repo_url                    = "${module.ci.ecr_repository_url}:latest"
+  vpc_id                          = module.vpc.vpc_id
+  subnet_a_id                     = module.vpc.subnet_a_id
+  aws_lb_target_group_alb_arn     = module.alb.aws_lb_target_group_alb_arn
+  aws_security_group_alb_id       = module.alb.aws_security_group_alb_id
   ssm_parameter_access_policy_arn = module.ssm.ssm_parameter_policy_arn
-  aws_ssm_parameter_env_hoge_arn = module.ssm.ssm_parameter_env_hoge_arn
+  aws_ssm_parameter_env_hoge_arn  = module.ssm.ssm_parameter_env_hoge_arn
 }
 
 # module "domain" {
@@ -75,20 +75,20 @@ module "ecs" {
 # }
 
 module "ci" {
-  source       = "../../modules/ci"
-  project_name = local.project_name
-  env = local.env
-  full_repository_id = local.full_repository_id
+  source                          = "../../modules/ci"
+  project_name                    = local.project_name
+  env                             = local.env
+  full_repository_id              = local.full_repository_id
   ssm_parameter_access_policy_arn = module.ssm.ssm_parameter_policy_arn
 }
 
 module "ssm" {
-  source       = "../../modules/ssm"
-  project_name = local.project_name
-  env          = local.env
-  region       = local.region
-  env_hoge =  local.env_hoge
+  source              = "../../modules/ssm"
+  project_name        = local.project_name
+  env                 = local.env
+  region              = local.region
+  env_hoge            = local.env_hoge
   ecr_repository_name = module.ci.ecr_repository_name
-  docker_user = local.docker_user
-  docker_token = local.docker_token
+  docker_user         = local.docker_user
+  docker_token        = local.docker_token
 }
