@@ -34,3 +34,10 @@ Next.js でバックエンドの API も構築しています。firebase の`idT
 5. yarn prisma:push
 6. yarn dev
 ```
+
+## terraformによるAWSリソース構築
+以下の構成図のリソースをterraformにより構築
+
+<div align="center">
+    <img src="./docs/my-nextjs-template-aws-architecture.png" alt="AWS構成図" width="80%" />
+</div>
