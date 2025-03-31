@@ -28,7 +28,7 @@ phases:
 
   build:
     commands:
-      - docker build \
+      - docker build -t ${ECR_REPOSITORY_NAME} . \
         --build-arg database_url="${DATABASE_URL}" \
         --build-arg firebase_private_key="${FIREBASE_PRIVATE_KEY}" \
         --build-arg firebase_client_email="${FIREBASE_CLIENT_EMAIL}" \
@@ -37,8 +37,7 @@ phases:
         --build-arg firebase_auth_domain="${FIREBASE_AUTH_DOMAIN}" \
         --build-arg firebase_storage_bucket="${FIREBASE_STORAGE_BUCKET}" \
         --build-arg firebase_messaging_sender_id="${FIREBASE_MESSAGING_SENDER_ID}" \
-        --build-arg firebase_app_id="${FIREBASE_APP_ID}" \
-        -t ${ECR_REPOSITORY_NAME} .
+        --build-arg firebase_app_id="${FIREBASE_APP_ID}"
       - docker tag ${ECR_REPOSITORY_NAME}:latest ${ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/${ECR_REPOSITORY_NAME}:latest
 
   post_build:
