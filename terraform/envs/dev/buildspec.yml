@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   parameter-store:
-    ECR_REPOSITORY_NAME: /CodeBuild/nextjs-my-blueprint/dev/ECR_REPOSITORY_NAME
+    ECR_REPOSITORY_NAME: /CodeBuild/my-nextjs-template/dev/ECR_REPOSITORY_NAME
     DOCKER_USER: /CodeBuild/DOCKER_USER
     DOCKER_TOKEN: /CodeBuild/DOCKER_TOKEN
 

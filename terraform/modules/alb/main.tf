@@ -29,7 +29,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = [var.subnet_a_id, var.subnet_c_id]
+  subnets            = [var.public_subnet_a_id, var.public_subnet_c_id]
 }
 
 resource "aws_lb_target_group" "alb" {

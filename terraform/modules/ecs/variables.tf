@@ -22,11 +22,19 @@ variable "vpc_id" {
   type = string
 }
 
-variable "subnet_a_id" {
+variable "private_subnet_a_id" {
   type = string
 }
 
-variable "subnet_c_id" {
+variable "private_subnet_c_id" {
+  type = string
+}
+
+variable "public_subnet_a_id" {
+  type = string
+}
+
+variable "public_subnet_c_id" {
   type = string
 }
 

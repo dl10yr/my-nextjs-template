@@ -10,24 +10,26 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "my-nextjs-template-tfstate"
-    key    = "my-nextjs-template-tfstate/${local.env}.tfstate"
+    key    = "my-nextjs-template-dev-tfstate.tfstate"
     region = "ap-northeast-1"
   }
 }
 
 module "vpc" {
-  source = "../../modules/vpc"
-  region = local.region
+  source       = "../../modules/vpc"
+  region       = local.region
+  project_name = local.project_name
+  env          = local.env
 }
 
 module "alb" {
-  source       = "../../modules/alb"
-  project_name = local.project_name
-  env          = local.env
-  region       = local.region
-  vpc_id       = module.vpc.vpc_id
-  subnet_a_id  = module.vpc.subnet_a_id
-  subnet_c_id  = module.vpc.subnet_c_id
+  source             = "../../modules/alb"
+  project_name       = local.project_name
+  env                = local.env
+  region             = local.region
+  vpc_id             = module.vpc.vpc_id
+  public_subnet_a_id = module.vpc.public_subnet_a_id
+  public_subnet_c_id = module.vpc.public_subnet_c_id
 }
 
 module "ecs" {
@@ -38,8 +40,10 @@ module "ecs" {
   fargate_memory                  = 512 // MB
   ecr_repo_url                    = "${module.ci.ecr_repository_url}:latest"
   vpc_id                          = module.vpc.vpc_id
-  subnet_a_id                     = module.vpc.subnet_a_id
-  subnet_c_id                     = module.vpc.subnet_c_id
+  private_subnet_a_id             = module.vpc.private_subnet_a_id
+  private_subnet_c_id             = module.vpc.private_subnet_c_id
+  public_subnet_a_id              = module.vpc.public_subnet_a_id
+  public_subnet_c_id              = module.vpc.public_subnet_c_id
   aws_lb_target_group_alb_arn     = module.alb.aws_lb_target_group_alb_arn
   aws_security_group_alb_id       = module.alb.aws_security_group_alb_id
   ssm_parameter_access_policy_arn = module.ssm.ssm_parameter_policy_arn

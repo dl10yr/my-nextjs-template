@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "nextjs" {
         "options" : {
           "awslogs-region" : "ap-northeast-1",
           "awslogs-stream-prefix" : "nextjs",
-          "awslogs-group" : "${aws_cloudwatch_log_group.nextjs.name}"
+          "awslogs-group" : "${aws_cloudwatch_log_group.ecs_nextjs_log_group.name}"
         }
       },
       "secrets" : [
@@ -57,9 +57,9 @@ resource "aws_ecs_service" "nextjs" {
   }
 
   network_configuration {
-    subnets          = [var.subnet_a_id, var.subnet_c_id]
+    subnets          = [var.private_subnet_a_id, var.private_subnet_c_id]
     security_groups  = [aws_security_group.nextjs.id]
-    assign_public_ip = true
+    assign_public_ip = false
   }
 }
 
