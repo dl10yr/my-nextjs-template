@@ -2,8 +2,8 @@ FROM node:20-alpine3.16
 
 # 必要なライブラリをインストール
 RUN apt-get update && apt-get upgrade openssl -y \
-&& apt-get clean \
-&& rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # 環境変数の定義
 ARG database_url
