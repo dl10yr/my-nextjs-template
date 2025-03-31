@@ -1,5 +1,8 @@
 FROM node:20-slim
 
+# 必要なライブラリをインストール
+RUN apt-get update -y && apt-get install -y openssl ca-certificates
+
 # 環境変数の定義
 ARG database_url
 ARG firebase_private_key
