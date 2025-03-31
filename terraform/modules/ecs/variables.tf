@@ -53,3 +53,39 @@ variable "ssm_parameter_access_policy_arn" {
 variable "aws_ssm_parameter_env_hoge_arn" {
   type = string
 }
+
+variable "aws_ssm_parameter_env_database_url_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_private_key_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_client_email_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_project_id_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_api_key_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_auth_domain_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_storage_bucket_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_messaging_sender_id_arn" {
+  type = string
+}
+
+variable "aws_ssm_parameter_env_firebase_app_id_arn" {
+  type = string
+}

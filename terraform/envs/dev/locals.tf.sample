@@ -7,4 +7,13 @@ locals {
   env_hoge           = "hoge"
   docker_user        = "xxxxx"
   docker_token       = "dckr_pat_xxxx"
+  env_database_url        = "postgresql://{url-from-supabase}:{password}@xxxxxxx"
+  env_firebase_private_key = ""
+  env_firebase_client_email = ""
+  env_firebase_project_id   = ""
+  env_firebase_api_key      = ""
+  env_firebase_auth_domain  = ""
+  env_firebase_storage_bucket = ""
+  env_firebase_messaging_sender_id = ""
+  env_firebase_app_id       = ""
 }

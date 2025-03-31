@@ -37,6 +37,42 @@ resource "aws_ecs_task_definition" "nextjs" {
         {
           "name" : "HOGE",
           "valueFrom" : "${var.aws_ssm_parameter_env_hoge_arn}"
+        },
+        {
+          "name" : "DATABASE_URL",
+          "valueFrom" : "${var.aws_ssm_parameter_env_database_url_arn}"
+        },
+        {
+          "name" : "FIREBASE_PRIVATE_KEY",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_private_key_arn}"
+        },
+        {
+          "name" : "FIREBASE_CLIENT_EMAIL",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_client_email_arn}"
+        },
+        {
+          "name" : "FIREBASE_PROJECT_ID",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_project_id_arn}"
+        },
+        {
+          "name" : "FIREBASE_API_KEY",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_api_key_arn}"
+        },
+        {
+          "name" : "FIREBASE_AUTH_DOMAIN",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_auth_domain_arn}"
+        },
+        {
+          "name" : "FIREBASE_STORAGE_BUCKET",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_storage_bucket_arn}"
+        },
+        {
+          "name" : "FIREBASE_MESSAGING_SENDER_ID",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_messaging_sender_id_arn}"
+        },
+        {
+          "name" : "FIREBASE_APP_ID",
+          "valueFrom" : "${var.aws_ssm_parameter_env_firebase_app_id_arn}"
         }
       ],
     }
