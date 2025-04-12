@@ -140,3 +140,15 @@ resource "aws_ssm_parameter" "env_firebase_app_id" {
     ignore_changes = [value]
   }
 }
+
+resource "aws_ssm_parameter" "env_api_base_url" {
+  name        = "/${var.project_name}/${var.env}/API_BASE_URL"
+  description = "API_BASE_URL"
+  type        = "SecureString"
+  value       = var.env_api_base_url
+
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+

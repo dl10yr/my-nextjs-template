@@ -61,3 +61,7 @@ variable "env_firebase_messaging_sender_id" {
 variable "env_firebase_app_id" {
   type = string
 }
+
+variable "env_api_base_url" {
+  type = string
+}

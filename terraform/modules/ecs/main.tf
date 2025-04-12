@@ -73,6 +73,10 @@ resource "aws_ecs_task_definition" "nextjs" {
         {
           "name" : "FIREBASE_APP_ID",
           "valueFrom" : "${var.aws_ssm_parameter_env_firebase_app_id_arn}"
+        },
+        {
+          "name" : "API_BASE_URL",
+          "valueFrom" : "${var.aws_ssm_parameter_env_api_base_url}"
         }
       ],
     }

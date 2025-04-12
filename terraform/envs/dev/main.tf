@@ -57,6 +57,7 @@ module "ecs" {
   aws_ssm_parameter_env_firebase_storage_bucket_arn      = module.ssm.ssm_parameter_env_firebase_storage_bucket_arn
   aws_ssm_parameter_env_firebase_messaging_sender_id_arn = module.ssm.ssm_parameter_env_firebase_messaging_sender_id_arn
   aws_ssm_parameter_env_firebase_app_id_arn              = module.ssm.ssm_parameter_env_firebase_app_id_arn
+  aws_ssm_parameter_env_api_base_url                     = module.ssm.ssm_parameter_env_api_base_url_arn
 }
 
 module "domain" {
@@ -92,6 +93,8 @@ module "ci" {
   env                             = local.env
   full_repository_id              = local.full_repository_id
   ssm_parameter_access_policy_arn = module.ssm.ssm_parameter_policy_arn
+  ecs_cluster_name                = module.ecs.ecs_cluster_name
+  ecs_service_name                = module.ecs.ecs_service_name
 }
 
 module "ssm" {
@@ -112,4 +115,5 @@ module "ssm" {
   env_firebase_storage_bucket      = local.env_firebase_storage_bucket
   env_firebase_messaging_sender_id = local.env_firebase_messaging_sender_id
   env_firebase_app_id              = local.env_firebase_app_id
+  env_api_base_url                 = local.env_api_base_url
 }

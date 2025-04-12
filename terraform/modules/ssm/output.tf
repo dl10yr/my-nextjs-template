@@ -41,3 +41,7 @@ output "ssm_parameter_env_firebase_messaging_sender_id_arn" {
 output "ssm_parameter_env_firebase_app_id_arn" {
   value = aws_ssm_parameter.env_firebase_app_id.arn
 }
+
+output "ssm_parameter_env_api_base_url_arn" {
+  value = aws_ssm_parameter.env_api_base_url.arn
+}

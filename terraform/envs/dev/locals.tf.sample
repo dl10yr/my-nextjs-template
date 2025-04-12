@@ -16,4 +16,5 @@ locals {
   env_firebase_storage_bucket = ""
   env_firebase_messaging_sender_id = ""
   env_firebase_app_id       = ""
+  env_api_base_url          = ""
 }

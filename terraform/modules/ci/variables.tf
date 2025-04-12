@@ -13,3 +13,11 @@ variable "full_repository_id" {
 variable "ssm_parameter_access_policy_arn" {
   type = string
 }
+
+variable "ecs_cluster_name" {
+  type = string
+}
+
+variable "ecs_service_name" {
+  type = string
+}

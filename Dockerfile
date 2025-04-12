@@ -13,6 +13,7 @@ ARG firebase_auth_domain
 ARG firebase_storage_bucket
 ARG firebase_messaging_sender_id
 ARG firebase_app_id
+ARG api_base_url
 
 # 環境変数を設定
 ENV DATABASE_URL=$database_url
@@ -24,6 +25,7 @@ ENV FIREBASE_AUTH_DOMAIN=$firebase_auth_domain
 ENV FIREBASE_STORAGE_BUCKET=$firebase_storage_bucket
 ENV FIREBASE_MESSAGING_SENDER_ID=$firebase_messaging_sender_id
 ENV FIREBASE_APP_ID=$firebase_app_id
+ENV API_BASE_URL=$api_base_url
 
 WORKDIR /app
 

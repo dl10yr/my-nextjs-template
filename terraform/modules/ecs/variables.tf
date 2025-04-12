@@ -89,3 +89,7 @@ variable "aws_ssm_parameter_env_firebase_messaging_sender_id_arn" {
 variable "aws_ssm_parameter_env_firebase_app_id_arn" {
   type = string
 }
+
+variable "aws_ssm_parameter_env_api_base_url" {
+  type = string
+}
