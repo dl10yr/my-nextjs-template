@@ -7,7 +7,7 @@ export default function Page() {
         <h1>index</h1>
       </div>
       <div className={styles.rightSection}>
-        <div>right</div>
+        <div>right1</div>
       </div>
     </div>
   )
