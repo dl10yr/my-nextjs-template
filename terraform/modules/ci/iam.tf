@@ -104,6 +104,21 @@ resource "aws_iam_policy" "codepipeline_policy" {
       {
         Effect = "Allow"
         Action = [
+          "ecs:DescribeServices",
+          "ecs:DescribeTaskDefinition",
+          "ecs:DescribeTasks",
+          "ecs:ListTasks",
+          "ecs:RegisterTaskDefinition",
+          "ecs:UpdateService",
+          "ecs:CreateService",
+          "ecs:ListServices",
+          "iam:PassRole"
+        ],
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "codecommit:GetBranch",
           "codecommit:GetCommit",
           "codecommit:UploadArchive",
