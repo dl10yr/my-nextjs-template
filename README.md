@@ -41,3 +41,12 @@ Next.js でバックエンドの API も構築しています。firebase の`idT
 <div align="center">
     <img src="./docs/my-nextjs-template-aws-architecture.png" alt="AWS構成図" width="80%" />
 </div>
+
+### AWSリソース構築手順
+1. `terraform/envs/dev`のlocals.tf.sampleをコピーして、locals.tfを作り値を埋める
+2. `terraform init`, `terraform plan`、`terraform apply`
+3. GitHubの権限許可
+    - AWS上でGitHubへの接続を許可 デベロッパー用ツール>設定>接続
+        - https://ap-northeast-1.console.aws.amazon.com/codesuite/settings/connections?region=ap-northeast-1
+    - GitHubでのリポジトリへのアクセス許可
+        - https://github.com/settings/installations
